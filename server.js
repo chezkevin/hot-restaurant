@@ -42,16 +42,26 @@ app.get("/api/tables", function(req, res) {
   res.json(customers);
 });
 
+// provides JSON
+app.get("/api/waitlist", function(req, res) {
+  // when client requests /api/tables, server responds by sending customers array
+  res.json(waitlist);
+});
+
 // Create New customers - takes in JSON input
 app.post("/api/tables", function(req, res) {
   var newcustomer = req.body;
   //newcustomer.routeName = newcustomer.name.replace(/\s+/g, "").toLowerCase();
+	console.log(newcustomer);
+	if (customers.length < 5){
+		customers.push(newcustomer);
+		res.json(true);
+	}
 
-  console.log(newcustomer);
-
-  customers.push(newcustomer);
-
-  res.json(customers);
+	else{
+		waitlist.push(newcustomer);
+		res.json(false);
+	}
 });
 
 // Starts the server to begin listening
