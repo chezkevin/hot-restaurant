@@ -78,8 +78,8 @@ app.post("/api/clear", function(req, res) {
 		customers.push(waitlist[i]);
 		console.log("i: " + i);
 	}
-	for (var i = 0; i < waitListLength ; i++){
-		waitlist.splice(index,i);
+	for (var j = 0; j < waitListLength ; j++){
+		waitlist.splice(0,1);
 	}
 });
 
