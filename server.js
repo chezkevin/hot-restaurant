@@ -15,6 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+// Initialize Customers (DATA)
+// =============================================================
+var customers = [];
+
 // Routes
 // =============================================================
 
@@ -30,6 +34,40 @@ app.get("/tables", function(req, res) {
 app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
+
+// provides JSON
+app.get("/api/tables", function(req, res) {
+  var customersArray = req.params.customers;
+  res.send(customersArray);
+  // if (chosen) {
+  //   console.log(chosen);
+
+  //   for (var i = 0; i < characters.length; i++) {
+  //     if (chosen === characters[i].routeName) {
+  //       res.json(characters[i]);
+  //       return;
+  //     }
+  //   }
+
+  //   res.json(false);
+  // }
+  // else {
+    
+  // }
+});
+
+// Create New customers - takes in JSON input
+app.post("/api/tables", function(req, res) {
+  var newcustomer = req.body;
+  //newcustomer.routeName = newcustomer.name.replace(/\s+/g, "").toLowerCase();
+
+  console.log(newcustomer);
+
+  customers.push(newcustomer);
+
+  res.json(newcustomer);
+});
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
