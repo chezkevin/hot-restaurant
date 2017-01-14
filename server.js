@@ -18,6 +18,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Initialize Customers (DATA)
 // =============================================================
 var customers = [];
+var waitlist = [];
 
 // Routes
 // =============================================================
@@ -37,23 +38,8 @@ app.get("/reserve", function(req, res) {
 
 // provides JSON
 app.get("/api/tables", function(req, res) {
-  var customersArray = req.params.customers;
-  res.send(customersArray);
-  // if (chosen) {
-  //   console.log(chosen);
-
-  //   for (var i = 0; i < characters.length; i++) {
-  //     if (chosen === characters[i].routeName) {
-  //       res.json(characters[i]);
-  //       return;
-  //     }
-  //   }
-
-  //   res.json(false);
-  // }
-  // else {
-    
-  // }
+  // when client requests /api/tables, server responds by sending customers array
+  res.json(customers);
 });
 
 // Create New customers - takes in JSON input
@@ -65,7 +51,7 @@ app.post("/api/tables", function(req, res) {
 
   customers.push(newcustomer);
 
-  res.json(newcustomer);
+  res.json(customers);
 });
 
 // Starts the server to begin listening
