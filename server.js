@@ -64,6 +64,25 @@ app.post("/api/tables", function(req, res) {
 	}
 });
 
+// clear the tables: move waitlist up
+app.post("/api/clear", function(req, res) {
+	customers = [];
+	if ( (waitlist.length < 5) && (waitlist.length > 0) ){
+		var waitListLength = waitlist.length;
+	}
+	if (waitlist.length > 5){
+		waitListLength = 5;
+	}
+	if (waitlist.length === 0){ return; }
+	for (var i = 0; i < waitListLength ; i++){
+		customers.push(waitlist[i]);
+		console.log("i: " + i);
+	}
+	for (var i = 0; i < waitListLength ; i++){
+		waitlist.splice(index,i);
+	}
+});
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
